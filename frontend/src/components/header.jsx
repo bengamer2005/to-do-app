@@ -12,7 +12,7 @@ const Header = () => {
 
             <nav>
                 <Link to="/">TASKS</Link>
-                <Link to="/historial">HISTORIAL</Link>
+                <Link to="/historial-tasks">HISTORIAL</Link>
             </nav>
         </>
     )
