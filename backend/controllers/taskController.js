@@ -16,11 +16,11 @@ const postTask = async (req, res) => {
     }
 }
 
-// llamar a todas las tareas
+// llamar a todas las tareas pendientes
 const getTasks = async (req, res) => {
     try {
-        const tasks = await Task.find({})
-        res.status(200).json(tasks)
+        const tasksPending = await Task.find({status: "Pending"})
+        res.status(200).json(tasksPending)
     } catch (error) {
         res.status(500).json({error: error.message})
     }
