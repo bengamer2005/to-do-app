@@ -26,6 +26,16 @@ const getTasks = async (req, res) => {
     }
 }
 
+// llama a las task que esten completadas
+const getCompletedTasks = async (req, res) => {
+    try {
+        const tasksCompleted = await Task.find({status: "Completed"})
+        res.status(200).json(tasksCompleted)
+    } catch (error) {
+        res.status(500).json({error: error.message})
+    }
+}
+
 // editar a una tarea
 const putTask = async (req, res) => {
     try {
@@ -36,6 +46,15 @@ const putTask = async (req, res) => {
     }
 }
 
+// cambia el status a Completed de una task
+const completeTask = async(req, res) => {
+    try {
+        const task = await Task.findByIdAndUpdate(req.params.id, { status: "Completed" }, { new: true })
+        res.status(200).json({ message: "Task completed", task })
+    } catch (error) {
+        res.status(500).json({error: error.message})
+    }
+}
 // elimina una tarea
 const deleteTask = async (req, res) => {
     try {
@@ -49,6 +68,8 @@ const deleteTask = async (req, res) => {
 module.exports = {
     postTask,
     getTasks,
+    getCompletedTasks,
     putTask,
+    completeTask,
     deleteTask
 }
