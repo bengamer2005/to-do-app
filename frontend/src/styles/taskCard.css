@@ -22,6 +22,7 @@
     "Open Sans",
     "Helvetica Neue",
     sans-serif;
+    margin-bottom: 3.5%;
 }
 
 .card:hover {
@@ -46,7 +47,14 @@
     margin-block-end: 12px;
     color: #dcdcdc;
 }
-.code-description {
+
+.card-status {
+    font-size: 14px;
+    color: #666;
+    margin-bottom: 15px;
+}
+
+.card-description {
     background-color: #0d1117;
     color: #dcdcdc;
     font-family:
