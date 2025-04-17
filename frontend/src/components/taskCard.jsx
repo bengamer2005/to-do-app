@@ -1,15 +1,17 @@
 import React from "react"
 import "../styles/taskCard.css"
 
-const TaskCard = (task) => {
+const TaskCard = ({title, description, status}) => {
     return (
         <>
             <div className="card">
-                <span className="card-title">{task.title}</span>
+                <span className="card-title">{title}</span>
                 <div></div>
                 <span className="card-button">EDIT</span> 
                 <span className="card-button">DELETE</span>
-                <div className="code-description">{task.description}</div>
+                <div></div>
+                <p className="card-status">STATUS: {status}</p>
+                <div className="card-description">{description}</div>
             </div>
         </>
     )

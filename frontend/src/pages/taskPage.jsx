@@ -1,45 +1,45 @@
 import React, { useState } from "react"
 import Header from "../components/header"
 import TaskCard from "../components/taskCard"
-import "../styles/taskBox.css"
-
-const taskData = {
-    title: "",
-    description: ""
-}
-
+import useTasksGet from "../hooks/useTasksGet"
+import PostTask from "../hooks/postTask"
+import "../styles/taskInput.css"
 
 const TaskPage = () => {
+    const [taskTitle, setTaskTitle] = useState("")
+    const [taskDescription, setTaskDescription] = useState("")
     
-    const [task, setTask] = useState(taskData)
-    const [tasks, setTasks] = useState([])
-    
-    const { title, description } = task
-    
+    const { tasks, fetchTasks } = useTasksGet()
+
     const putValue = (name, value) => {
-        setTask((prevState) => {
-            return {
-                ...prevState,
-                [name]: value
-            }
-        })
+        if(name === "taskTitle") {
+            setTaskTitle(value)
+        } else if(name === "taskDescription") {
+            setTaskDescription(value)
+        }
     }
 
-    const handleSubmit = (event) => {
+    const handleSubmit = async (event) => {
         event.preventDefault()
 
-        if(!title.trim() || !description.trim()) {
+        if(!taskTitle.trim() || !taskDescription.trim()) {
             return alert("All fields are required")
         }
-    
-        setTasks((prevTasks) => [
-            ...prevTasks, 
-            task
-        ])
-        
-        setTask(taskData)
+
+        const newTask = {
+            taskTitle,
+            status,
+            taskDescription
+        }
+
+        const result = await PostTask(newTask)
+
+        if(result) {
+            fetchTasks()
+            setTaskTitle("")
+            setTaskDescription("")
+        }
     }
-    
 
     return (
         <div className="mainPage">
@@ -49,10 +49,10 @@ const TaskPage = () => {
             <form onSubmit={handleSubmit}>
                 <div className="addTaskBox">
 
-                    <input type="text" name="title" id="taskInput" value={title} onChange={event => putValue(event.target.name, event.target.value)}
+                    <input type="text" name="taskTitle" id="taskInput" value={taskTitle} onChange={event => putValue(event.target.name, event.target.value)}
                     placeholder="Add new task title ..." />
 
-                    <input type="text" name="description" id="taskInput" value={description} onChange={event => putValue(event.target.name, event.target.value)}
+                    <input type="text" name="taskDescription" id="taskInput" value={taskDescription} onChange={event => putValue(event.target.name, event.target.value)}
                     placeholder="Add new task description ..." />
 
                     <button id="sendButton" type="submit">
@@ -72,12 +72,16 @@ const TaskPage = () => {
             <div className="space"></div>
 
             <div className="cards">
-                {tasks.map((newTask, i) => {
-                    return (
-                        <TaskCard key={i} title={newTask.title} description={newTask.description}/>
-                    )
-                })}
+                {tasks.map((newTask, i) => (
+                    <TaskCard
+                        key={i}
+                        title={newTask.taskTitle}
+                        status={newTask.status}
+                        description={newTask.taskDescription}
+                    />
+                ))}
             </div>
+            
         </div>
     )
 }

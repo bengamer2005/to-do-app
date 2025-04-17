@@ -2,14 +2,14 @@ const Task = require("../models/taskModel")
 
 // crear una tarea nueva 
 const postTask = async (req, res) => {
-    const {taskTitle, taskDescrpition} = req.body
+    const {taskTitle, taskDescription} = req.body
 
-    if(!taskTitle || !taskDescrpition) {
+    if(!taskTitle || !taskDescription) {
         return res.status(400).json({message: "faltan por ingresar datos"})
     }
 
     try {
-        const task = await Task.create({taskTitle, taskDescrpition})
+        const task = await Task.create({taskTitle, taskDescription})
         res.status(200).json({message: "Tarea creada: ", task})
     } catch (error) {
         res.status(500).json({error: error.message})
