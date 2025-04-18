@@ -5,7 +5,7 @@ app.use(express.json())
 // se usa cors para poder hacer las solicitudes desde mi frontend
 const cors = require("cors")
 app.use(cors({
-    origin: "http://localhost:5173"
+    origin: "http://localhost:5172"
 }))
 
 // creamos los endpoints

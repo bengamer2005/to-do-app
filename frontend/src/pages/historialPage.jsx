@@ -21,7 +21,8 @@ const HistorialPage = () => {
     return (
         <>
             <Header/>
-            <div className="space"></div>
+            <h1>HISTORIAL</h1>
+
             <div className="cards">
                 {tasks.map((newTask, i) => (
                     <TaskCard
