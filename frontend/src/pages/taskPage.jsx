@@ -2,7 +2,7 @@ import React, { useState } from "react"
 import Header from "../components/header"
 import TaskCard from "../components/taskCard"
 import useTasksGet from "../hooks/useTasksGet"
-import PostTask from "../hooks/postTask"
+import useTaskPost from "../hooks/useTaskPost"
 import "../styles/taskInput.css"
 
 const TaskPage = () => {
@@ -32,7 +32,7 @@ const TaskPage = () => {
             taskDescription
         }
 
-        const result = await PostTask(newTask)
+        const result = await useTaskPost(newTask)
 
         if(result) {
             fetchTasks()
