@@ -6,9 +6,9 @@ const TaskCard = ({title, description, status}) => {
         <>
             <div className="card">
                 <span className="card-title">{title}</span>
-                <div></div>
-                <span className="card-button">EDIT</span> 
-                <span className="card-button">DELETE</span>
+                <div className="space"></div>
+                <button id="" type="submit"  className="card-button">EDIT</button> 
+                <button id="" type="submit"  className="card-button">COMPLETED</button>
                 <div></div>
                 <p className="card-status">STATUS: {status}</p>
                 <div className="card-description">{description}</div>
