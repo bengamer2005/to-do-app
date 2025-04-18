@@ -1,14 +1,14 @@
 import React, { useState } from "react"
 import Header from "../components/header"
 import TaskCard from "../components/taskCard"
-import useTasksGet from "../hooks/useTasksGet"
+import useTasksCompleted from "../hooks/useTasksCompleted"
 import "../styles/global.css"
 
 const HistorialPage = () => {
     const [taskTitle, setTaskTitle] = useState("")
     const [taskDescription, setTaskDescription] = useState("")
     
-    const { tasks, fetchTasks } = useTasksGet()
+    const { tasks, fetchTasks } = useTasksCompleted()
 
     const putValue = (name, value) => {
         if(name === "taskTitle") {
@@ -21,7 +21,8 @@ const HistorialPage = () => {
     return (
         <>
             <Header/>
-            <div className="space"></div>
+            <h1>HISTORIAL</h1>
+
             <div className="cards">
                 {tasks.map((newTask, i) => (
                     <TaskCard
