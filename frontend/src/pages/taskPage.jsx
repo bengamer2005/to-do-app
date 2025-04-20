@@ -54,7 +54,7 @@ const TaskPage = () => {
         <div className="mainPage">
             <Header/>
 
-            <div className="space"></div>
+            <h1>ADD TASKS</h1>
             <form onSubmit={handleSubmit}>
                 <div className="addTaskBox">
 
