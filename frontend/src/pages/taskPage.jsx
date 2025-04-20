@@ -2,7 +2,8 @@ import React, { useState } from "react"
 import Header from "../components/header"
 import TaskCard from "../components/taskCard"
 import useTasksGet from "../hooks/useTasksGet"
-import useTaskPost from "../hooks/useTaskPost"
+import PostTask from "../services/postTask"
+import TaskComplete from "../services/completeTask"
 import "../styles/taskInput.css"
 
 const TaskPage = () => {
@@ -28,16 +29,24 @@ const TaskPage = () => {
 
         const newTask = {
             taskTitle,
-            status,
+            status: "Pending",
             taskDescription
         }
 
-        const result = await useTaskPost(newTask)
+        const result = await PostTask(newTask)
 
         if(result) {
             fetchTasks()
             setTaskTitle("")
             setTaskDescription("")
+        }
+    }
+
+    const handleCompleteTask = async (task) => {
+        const result = await TaskComplete(task)
+
+        if(result) {
+            fetchTasks()
         }
     }
 
@@ -74,10 +83,10 @@ const TaskPage = () => {
             <div className="cards">
                 {tasks.map((newTask, i) => (
                     <TaskCard
-                        key={i}
-                        title={newTask.taskTitle}
-                        status={newTask.status}
-                        description={newTask.taskDescription}
+                    key={i}
+                    title={newTask.taskTitle}
+                    status={newTask.status}
+                    description={newTask.taskDescription}
                     />
                 ))}
             </div>
