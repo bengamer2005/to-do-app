@@ -43,7 +43,7 @@ const TaskPage = () => {
     }
 
     const handleCompleteTask = async (task) => {
-        const result = await TaskComplete(task)
+        const result = await TaskComplete(task._id)
 
         if(result) {
             fetchTasks()
@@ -87,6 +87,8 @@ const TaskPage = () => {
                     title={newTask.taskTitle}
                     status={newTask.status}
                     description={newTask.taskDescription}
+                    task={newTask}
+                    onComplete={handleCompleteTask}
                     />
                 ))}
             </div>

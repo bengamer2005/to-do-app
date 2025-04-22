@@ -1,19 +1,16 @@
 import React from "react"
 
-const TaskComplete = async (task) => {
-    const { _id } = task
-
+const TaskComplete = async (_id) => {
     try {
         const response = await fetch(`http://localhost:3000/to-do-app/completeTask/${_id}`, {
             method: "POST",
             headers: {
                 "Content-Type": "application/json",
             },
-            body: JSON.stringify(task)
         })
 
         if(!response.ok) {
-            return alert("Failed to change the status of the task")
+            alert("Failed to change the status of the task")
         } 
 
         const result = await response.json()
