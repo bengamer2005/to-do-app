@@ -4,6 +4,7 @@ import TaskCard from "../components/taskCard"
 import useTasksGet from "../hooks/useTasksGet"
 import PostTask from "../services/postTask"
 import TaskComplete from "../services/completeTask"
+import TaskEdit from "../services/editTask"
 import "../styles/taskInput.css"
 
 const TaskPage = () => {
@@ -50,6 +51,14 @@ const TaskPage = () => {
         }
     }
 
+    const handleEditTask = async (task) => {
+        const result = await TaskEdit(task._id)
+
+        if (result) {
+            fetchTasks()
+        }
+    }
+
     return (
         <div className="mainPage">
             <Header/>
@@ -89,6 +98,7 @@ const TaskPage = () => {
                     description={newTask.taskDescription}
                     task={newTask}
                     onComplete={handleCompleteTask}
+                    onEdit={handleEditTask}
                     />
                 ))}
             </div>
