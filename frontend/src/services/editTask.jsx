@@ -18,12 +18,13 @@ const TaskEdit = async (_id) => {
             })
     
             if(response.ok) {
-                alert("Task edited successfully")
-            } else {
-                return console.log("Error al editar la task");
+                return alert("se edito la task con exito");
             }
-            
-            const result = await response.json()
+
+            const result = await response
+
+            return result
+
         } catch (error) {
             console.error("Error de conexión:", error)
         }
