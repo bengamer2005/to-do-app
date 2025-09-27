@@ -1,11 +1,12 @@
 const express = require("express")
 const app = express()
 app.use(express.json())
+require("dotenv").config({ path: "./.env" })
 
 // se usa cors para poder hacer las solicitudes desde mi frontend
 const cors = require("cors")
 app.use(cors({
-    origin: "http://localhost:5172"
+    origin: process.env.FRONTRND_URL
 }))
 
 // creamos los endpoints

@@ -11,8 +11,8 @@ const Header = () => {
             </header>
 
             <nav>
-                <Link to="/">TASKS</Link>
-                <Link to="/historial-tasks">HISTORIAL</Link>
+                <Link style={{ textDecoration: "none", width: "50%" }} to="/">PENDIENTES</Link>
+                <Link style={{ textDecoration: "none", width: "50%" }} to="/historial-tasks">HISTORIAL</Link>
             </nav>
         </>
     )
