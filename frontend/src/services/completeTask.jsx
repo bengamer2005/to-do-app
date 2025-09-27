@@ -1,8 +1,9 @@
 import React from "react"
+const APIs = import.meta.env.VITE_BACKEND_URL 
 
 const TaskComplete = async (_id) => {
     try {
-        const response = await fetch(`http://localhost:3000/to-do-app/completeTask/${_id}`, {
+        const response = await fetch(`${APIs}/to-do-app/completeTask/${_id}`, {
             method: "POST",
             headers: {
                 "Content-Type": "application/json",

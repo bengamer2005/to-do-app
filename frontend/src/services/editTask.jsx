@@ -1,4 +1,5 @@
 import React from "react"
+const APIs = import.meta.env.VITE_BACKEND_URL 
 
 const TaskEdit = async (_id) => {
     const newTaskTitle = prompt("New task title: ")
@@ -6,7 +7,7 @@ const TaskEdit = async (_id) => {
 
     if (newTaskTitle || newTaskTitle) {
         try {
-            const response = fetch(`http://localhost:3000/to-do-app/putTask/${_id}`, {
+            const response = fetch(`${APIs}/to-do-app/putTask/${_id}`, {
                 method: "PUT",
                 headers: {
                     "Content-Type": "application/json",
