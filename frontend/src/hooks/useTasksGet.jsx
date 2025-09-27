@@ -1,11 +1,12 @@
 import { useEffect, useState } from "react"
+const APIs = import.meta.env.VITE_BACKEND_URL
 
 const useTasksGet = () => {
     const [tasks, setTasks] = useState([])
 
     const fetchTasks = async () => {
         try {
-            const res = await fetch("http://localhost:3000/to-do-app/getTask")
+            const res = await fetch(`${APIs}/to-do-app/getTask`)
             if(!res.ok) throw new Error("Error al obtener tareas")
             const data = await res.json()
             setTasks(data)
