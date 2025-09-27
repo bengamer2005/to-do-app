@@ -1,6 +1,7 @@
 const express = require("express")
 const app = express()
 app.use(express.json())
+require("dotenv").config({ path: "./.env" })
 
 // se usa cors para poder hacer las solicitudes desde mi frontend
 const cors = require("cors")

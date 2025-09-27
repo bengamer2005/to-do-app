@@ -5,7 +5,9 @@ import useTasksGet from "../hooks/useTasksGet"
 import PostTask from "../services/postTask"
 import TaskComplete from "../services/completeTask"
 import TaskEdit from "../services/editTask"
+import { Notyf } from "notyf"
 import "../styles/taskInput.css"
+import "notyf/notyf.min.css"
 
 const TaskPage = () => {
     const [taskTitle, setTaskTitle] = useState("")
@@ -21,16 +23,21 @@ const TaskPage = () => {
         }
     }
 
+    const notyf = new Notyf({
+        position: { x: "right", y: "bottom" },
+        duration: 5000,
+    })
+
     const handleSubmit = async (event) => {
         event.preventDefault()
 
-        if(!taskTitle.trim() || !taskDescription.trim()) {
-            return alert("All fields are required")
+        if(!taskTitle || !taskDescription) {
+            return notyf.error("Faltan campos obligatorios")
         }
 
         const newTask = {
             taskTitle,
-            status: "Pending",
+            status: "Pendiente",
             taskDescription
         }
 
@@ -40,6 +47,7 @@ const TaskPage = () => {
             fetchTasks()
             setTaskTitle("")
             setTaskDescription("")
+            notyf.success("Pendiente agregado")
         }
     }
 
@@ -48,6 +56,7 @@ const TaskPage = () => {
 
         if(result) {
             fetchTasks()
+            notyf.success("Pendiente pasado a completado!")
         }
     }
 
@@ -56,6 +65,7 @@ const TaskPage = () => {
 
         if (result) {
             fetchTasks()
+            notyf.success("Pendiente actualizado")
         }
     }
 
@@ -63,15 +73,15 @@ const TaskPage = () => {
         <div className="mainPage">
             <Header/>
 
-            <h1>ADD TASKS</h1>
+            <h1>Agregar pendientes</h1>
             <form onSubmit={handleSubmit}>
                 <div className="addTaskBox">
 
                     <input type="text" name="taskTitle" id="taskInput" value={taskTitle} onChange={event => putValue(event.target.name, event.target.value)}
-                    placeholder="Add new task title ..." />
+                    placeholder="Agrega titulo del pendiente nuevo ..." />
 
                     <input type="text" name="taskDescription" id="taskInput" value={taskDescription} onChange={event => putValue(event.target.name, event.target.value)}
-                    placeholder="Add new task description ..." />
+                    placeholder="Agrega la descripcion del pendiente nuevo ..." />
 
                     <button id="sendButton" type="submit">
                         <svg fill="none" viewBox="0 0 664 663">
